@@ -1,0 +1,54 @@
+{
+  "weddings": {
+    "label": "Weddings",
+    "photos": [
+      "decor-01.jpeg",
+      "decor-03.jpeg",
+      "decor-05.jpeg",
+      "decor-15.jpeg",
+      "decor-18.jpeg",
+      "decor-19.jpeg",
+      "decor-20.jpeg"
+    ]
+  },
+  "birthdays": {
+    "label": "Birthdays",
+    "photos": [
+      "decor-02.jpeg",
+      "decor-04.jpeg",
+      "decor-07.jpeg",
+      "decor-12.jpeg"
+    ]
+  },
+  "baby-showers": {
+    "label": "Baby Showers",
+    "photos": [
+      "decor-13.jpeg",
+      "decor-16.jpeg"
+    ]
+  },
+  "aqiqah": {
+    "label": "Aqiqah",
+    "photos": []
+  },
+  "mehndi-traditional": {
+    "label": "Mehndi / Traditional",
+    "photos": [
+      "decor-06.jpeg",
+      "decor-08.jpeg",
+      "decor-09.jpeg",
+      "decor-10.jpeg",
+      "decor-11.jpeg",
+      "decor-14.jpeg",
+      "decor-17.jpeg"
+    ]
+  },
+  "corporate": {
+    "label": "Corporate",
+    "photos": []
+  },
+  "other": {
+    "label": "Other",
+    "photos": []
+  }
+}
