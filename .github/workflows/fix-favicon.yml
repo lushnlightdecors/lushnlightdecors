@@ -1,0 +1,63 @@
+name: Fix favicon
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-favicon.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-favicon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use selected logo as favicon
+        shell: bash
+        run: |
+          cp "ChatGPT Image Sep 22, 2026, 09_17_24 PM.png" favicon.png
+          cp "ChatGPT Image Sep 22, 2026, 09_17_24 PM.png" apple-touch-icon.png
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          pages = [
+              Path('index.html'),
+              Path('about/index.html'),
+              Path('wedding-decor/index.html'),
+              Path('birthday-decor/index.html'),
+              Path('baby-shower-decor/index.html'),
+              Path('aqiqah-decor/index.html'),
+              Path('mehndi-traditional-decor/index.html'),
+          ]
+
+          replacement = (
+              '<link rel="icon" type="image/png" href="/favicon.png?v=91724">\n'
+              '<link rel="shortcut icon" type="image/png" href="/favicon.png?v=91724">\n'
+              '<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=91724">'
+          )
+
+          for path in pages:
+              text = path.read_text(encoding='utf-8')
+              text = re.sub(r'<link\s+rel="icon"[^>]*>', replacement, text, count=1)
+              text = re.sub(r'\n?<link\s+rel="shortcut icon"[^>]*>', '', text)
+              text = re.sub(r'\n?<link\s+rel="apple-touch-icon"[^>]*>', '', text)
+              # Reinsert the complete favicon block after canonical if cleanup removed extras.
+              if '/favicon.png?v=91724' not in text:
+                  text = re.sub(r'(<link\s+rel="canonical"[^>]*>)', r'\1\n' + replacement, text, count=1)
+              else:
+                  # Ensure the selected block is complete.
+                  text = re.sub(r'<link\s+rel="icon"\s+type="image/png"\s+href="/favicon\.png\?v=91724">', replacement, text, count=1)
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit favicon fix
+        shell: bash
+        run: |
+          git config user.name "lushnlightdecors"
+          git config user.email "lushnlightdecors@gmail.com"
+          git add favicon.png apple-touch-icon.png index.html about/index.html wedding-decor/index.html birthday-decor/index.html baby-shower-decor/index.html aqiqah-decor/index.html mehndi-traditional-decor/index.html
+          git commit -m "Fix favicon using selected LushnLight logo" || exit 0
+          git push
