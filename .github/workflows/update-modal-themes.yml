@@ -1,0 +1,25 @@
+name: Update decor modal themes
+
+on:
+  push:
+    paths:
+      - '.github/update_modal_themes.py'
+      - '.github/workflows/update-modal-themes.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update header and decor modal themes
+        run: python3 .github/update_modal_themes.py
+      - name: Commit website update
+        run: |
+          git config user.name "lushnlightdecors"
+          git config user.email "lushnlightdecors@gmail.com"
+          git add index.html
+          git commit -m "Match header accent and add themed decor modals" || exit 0
+          git push
