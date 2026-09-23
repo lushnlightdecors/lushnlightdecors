@@ -51,6 +51,14 @@ for key, photos in ADDITIONS.items():
 data['baby-showers']['label'] = 'Baby & Bridal Shower'
 gallery_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 
+# Remove old image from decor element modal data too.
+decor_path = ROOT / 'decor-elements.json'
+decor_data = json.loads(decor_path.read_text(encoding='utf-8'))
+for cat in decor_data.values():
+    if isinstance(cat, dict) and isinstance(cat.get('photos'), list):
+        cat['photos'] = [p for p in cat['photos'] if p != OLD]
+decor_path.write_text(json.dumps(decor_data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
 # Helpers for dedicated category pages.
 def remove_old_img_tags(text):
     return re.sub(r'\s*<img\b[^>]*' + re.escape(OLD) + r'[^>]*>', '', text, flags=re.I)
@@ -115,4 +123,4 @@ for p in ROOT.rglob('*'):
 if remaining:
     raise SystemExit('Old image still referenced in: ' + ', '.join(remaining))
 
-print('Updated gallery categories, dedicated pages, video poster, and Baby & Bridal Shower naming.')
+print('Updated gallery categories, dedicated pages, video poster, Baby & Bridal Shower naming, and removed old references.')
