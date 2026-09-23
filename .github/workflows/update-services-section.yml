@@ -1,0 +1,25 @@
+name: Update services section
+
+on:
+  push:
+    paths:
+      - '.github/update_services_section.py'
+      - '.github/workflows/update-services-section.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update homepage services section
+        run: python3 .github/update_services_section.py
+      - name: Commit homepage update
+        run: |
+          git config user.name "lushnlightdecors"
+          git config user.email "lushnlightdecors@gmail.com"
+          git add index.html
+          git commit -m "Separate celebration types from decor elements" || exit 0
+          git push
