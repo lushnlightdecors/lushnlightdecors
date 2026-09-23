@@ -1,4 +1,4 @@
-name: Add secondary page lightbox
+name: Add secondary page lightboxes
 
 on:
   push:
@@ -9,20 +9,65 @@ permissions:
   contents: write
 
 jobs:
-  add-lightbox:
+  add-lightboxes:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update secondary pages
+
+      - name: Add gallery lightbox to secondary pages
         shell: bash
         run: |
-          echo 'CmZyb20gcGF0aGxpYiBpbXBvcnQgUGF0aApwYWdlcz1bUGF0aCgiYWJvdXQvaW5kZXguaHRtbCIpLFBhdGgoIndlZGRpbmctZGVjb3IvaW5kZXguaHRtbCIpLFBhdGgoImJpcnRoZGF5LWRlY29yL2luZGV4Lmh0bWwiKSxQYXRoKCJiYWJ5LXNob3dlci1kZWNvci9pbmRleC5odG1sIiksUGF0aCgiYXFpcWFoLWRlY29yL2luZGV4Lmh0bWwiKSxQYXRoKCJtZWhuZGktdHJhZGl0aW9uYWwtZGVjb3IvaW5kZXguaHRtbCIpXQpjc3M9Jy5zZWNvbmRhcnktbGlnaHRib3h7cG9zaXRpb246Zml4ZWQ7aW5zZXQ6MDt6LWluZGV4OjEwMDA7YmFja2dyb3VuZDpyZ2JhKDEyLDI0LDE4LC45NCk7ZGlzcGxheTpub25lO2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyO3BhZGRpbmc6MjRweH0uc2Vjb25kYXJ5LWxpZ2h0Ym94Lm9wZW57ZGlzcGxheTpmbGV4fS5zZWNvbmRhcnktbGlnaHRib3ggaW1ne21heC13aWR0aDptaW4oMTEwMHB4LDkwdncpO21heC1oZWlnaHQ6ODZ2aDtPYmplY3QtZml0OmNvbnRhaW47Ym9yZGVyLXJhZGl1czoxMHB4O2JveC1zaGFkb3c6MCAxNnB4IDUwcHggcmdiYSgwLDAsMCwuMzUpfS5zZWNvbmRhcnktbGlnaHRib3ggYnV0dG9ue3Bvc2l0aW9uOmFic29sdXRlO2JvcmRlcjowO2JhY2tncm91bmQ6cmdiYSgyNTUsMjU1LDI1NSwuOTIpO2NvbG9yOiMxMjNmMmE7d2lkdGg6NDRweDtoZWlnaHQ6NDRweDtib3JkZXItcmFkaXVzOjUwJTtmb250LXNpemU6MS41cmVtO2N1cnNvcjpwb2ludGVyO2Rpc3BsYXk6Z3JpZDtwbGFjZS1pdGVtczpjZW50ZXI7bGluZS1oZWlnaHQ6MX0uc2Vjb25kYXJ5LWxpZ2h0Ym94IC5zbGItY2xvc2V7cmlnaHQ6MjJweDt0b3A6MjJweH0uc2Vjb25kYXJ5LWxpZ2h0Ym94IC5zbGItcHJldntsZWZ0OjIycHh9LnNlY29uZGFyeS1saWdodGJveCAuc2xiLW5leHR7cmlnaHQ6MjJweH0uZ2FsbGVyeSBpbWcsLmhlcm8taW1nLC5ldm9sdmUtcGhvdG97Y3Vyc29yOnpvb20taW59QG1lZGlhKG1heC13aWR0aDo3NjBweCl7LnNlY29uZGFyeS1saWdodGJveHtwYWRkaW5nOjEycHh9LnNlY29uZGFyeS1saWdodGJveCAuc2xiLXByZXZ7bGVmdDo4cHh9LnNlY29uZGFyeS1saWdodGJveCAuc2xiLW5leHR7cmlnaHQ6OHB4fS5zZWNvbmRhcnktbGlnaHRib3ggLnNsYi1jbG9zZXtyaWdodDo4cHg7dG9wOjhweH19Jwpqcz0nPHNjcmlwdCBpZD0ic2Vjb25kYXJ5LWxpZ2h0Ym94LXNjcmlwdCI+KGZ1bmN0aW9uKCl7aWYoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInNlY29uZGFyeS1saWdodGJveCIpKXJldHVybjtjb25zdCBjYW5kaWRhdGVzPVsuLi5kb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCIjZ2FsbGVyeSAuZ2FsbGVyeSBpbWcsLmhlcm8taW1nLC5ldm9sdmUtcGhvdG8iKV07aWYoIWNhbmRpZGF0ZXMubGVuZ3RoKXJldHVybjtjb25zdCBib3g9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7Ym94LmNsYXNzTmFtZT0ic2Vjb25kYXJ5LWxpZ2h0Ym94Ijtib3guaWQ9InNlY29uZGFyeS1saWdodGJveCI7Ym94LnNldEF0dHJpYnV0ZSgiYXJpYS1oaWRkZW4iLCJ0cnVlIik7Ym94LmlubmVySFRNTD0nPGJ1dHRvbiBjbGFzcz0ic2xiLWNsb3NlIiB0eXBlPSJidXR0b24iIGFyaWEtbGFiZWw9IkNsb3NlIj7DlzwvYnV0dG9uPjxidXR0b24gY2xhc3M9InNsYi1wcmV2IiB0eXBlPSJidXR0b24iIGFyaWEtbGFiZWw9IlByZXZpb3VzIHBob3RvIj7CuTwvYnV0dG9uPjxpbWcgY2xhc3M9InNsYi1pbWFnZSIgYWx0PSJMdXNoBkxpZ2h0IERlY29ycyBnYWxsZXJ5IHBob3RvIj48YnV0dG9uIGNsYXNzPSJzbGItbmV4dCIgdHlwZT0iYnV0dG9uIiBhcmlhLWxhYmVsPSJOZXh0IHBob3RvIj7CuTwvYnV0dG9uPic7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChib3gpO2NvbnN0IGltYWdlPWJveC5xdWVyeVNlbGVjdG9yKCIuc2xiLWltYWdlIik7bGV0IGN1cnJlbnQ9MDtmdW5jdGlvbiBzaG93KGkpe2N1cnJlbnQ9KGkrY2FuZGlkYXRlcy5sZW5ndGgpJWNhbmRpZGF0ZXMubGVuZ3RoO2ltYWdlLnNyYz1jYW5kaWRhdGVzW2N1cnJlbnRdLmN1cnJlbnRTcmN8fGNhbmRpZGF0ZXNbY3VycmVudF0uc3JjO2ltYWdlLmFsdD1jYW5kaWRhdGVzW2N1cnJlbnRdLmFsdHx8Ikx1c2huTGlnaHQgRGVjb3JzIGdhbGxlcnkgcGhvdG8iO2JveC5jbGFzc0xpc3QuYWRkKCJvcGVuIik7Ym94LnNldEF0dHJpYnV0ZSgiYXJpYS1oaWRkZW4iLCJmYWxzZSI7ZG9jdW1lbnQuYm9keS5zdHlsZS5vdmVyZmxvdz0iaGlkZGVuIn1mdW5jdGlvbiBjbG9zZSgpe2JveC5jbGFzc0xpc3QucmVtb3ZlKCJvcGVuIik7Ym94LnNldEF0dHJpYnV0ZSgiYXJpYS1oaWRkZW4iLCJ0cnVlIik7ZG9jdW1lbnQuYm9keS5zdHlsZS5vdmVyZmxvdz0iIn1jYW5kaWRhdGVzLmZvckVhY2goKGVsLGkpPT57ZWwuc2V0QXR0cmlidXRlKCJ0YWJpbmRleCIsIjAiKTtlbC5zZXRBdHRyaWJ1dGUoInJvbGUiLCJidXR0b24iKTtlbC5hZGRFdmVudExpc3RlbmVyKCJjbGljayIsKCk9PnNob3coaSkpO2VsLmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLGU9PntpZihlLmtleT09PSJFbnRlciJ8fGUua2V5PT09IiAiKXtlLnByZXZlbnREZWZhdWx0KCk7c2hvdyhpKX19KX0pO2JveC5xdWVyeVNlbGVjdG9yKCIuc2xiLWNsb3NlIikub25jbGljaz1jbG9zZTtib3gucXVlcnlTZWxlY3RvcigiLnNsYi1wcmV2Iikub25jbGljaz0oKT0+c2hvdyhjdXJyZW50LTEpO2JveC5xdWVyeVNlbGVjdG9yKCIuc2xiLW5leHQiKS5vbmNsaWNrPSgpPT5zaG93KGN1cnJlbnQrMSk7Ym94LmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIixlPT57aWYoZS50YXJnZXQ9PT1ib3gpY2xvc2UoKX0pO2RvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLGU9PntpZighYm94LmNsYXNzTGlzdC5jb250YWlucygib3BlbiIpKXJldHVybjtpZihlLmtleT09PSJFc2NhcGUiKWNsb3NlKCk7aWYoZS5rZXk9PT0iQXJyb3dMZWZ0IilzaG93KGN1cnJlbnQtMSk7aWYoZS5rZXk9PT0iQXJyb3dSaWdodCIpc2hvdyhjdXJyZW50KzEpfSk7fSkoKTs8L3NjcmlwdD4nCmZvciBwYXRoIGluIHBhZ2VzOgogICAgdGV4dD1wYXRoLnJlYWRfdGV4dChlbmNvZGluZz0idXRmLTgiKQogICAgaWYgInNlY29uZGFyeS1saWdodGJveHsiIG5vdCBpbiB0ZXh0OgogICAgICAgIHRleHQ9dGV4dC5yZXBsYWNlKCI8L3N0eWxlPiIsY3NzKyI8L3N0eWxlPiIsMSkKICAgIGlmICdpZD0ic2Vjb25kYXJ5LWxpZ2h0Ym94LXNjcmlwdCInIG5vdCBpbiB0ZXh0OgogICAgICAgIHRleHQ9dGV4dC5yZXBsYWNlKCI8L2JvZHk+IixqcytvYm9keT4iLDEpCiAgICBwYXRoLndyaXRlX3RleHQodGV4dCxlbmNvZGluZz0idXRmLTgiKQo=' | base64 -d > /tmp/add_lightbox.py
-          python3 /tmp/add_lightbox.py
-      - name: Commit changes
+          python3 - <<'PY'
+          from pathlib import Path
+
+          pages = [
+              Path('about/index.html'),
+              Path('wedding-decor/index.html'),
+              Path('birthday-decor/index.html'),
+              Path('baby-shower-decor/index.html'),
+              Path('aqiqah-decor/index.html'),
+              Path('mehndi-traditional-decor/index.html'),
+          ]
+
+          css = '''
+/* Secondary page gallery lightbox */
+.page-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(12,24,18,.94);display:none;align-items:center;justify-content:center;padding:24px}
+.page-lightbox.open{display:flex}
+.page-lightbox img{max-width:min(1100px,90vw);max-height:86vh;object-fit:contain;border-radius:10px;box-shadow:0 18px 60px rgba(0,0,0,.32)}
+.page-lightbox button{position:absolute;border:0;background:rgba(255,255,255,.94);color:#123f2a;width:48px;height:48px;border-radius:50%;font-size:1.7rem;line-height:1;cursor:pointer;display:grid;place-items:center;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+.page-lightbox button:hover{background:#fff;transform:scale(1.05)}
+.page-lb-close{right:22px;top:22px}.page-lb-prev{left:22px}.page-lb-next{right:22px}.page-lightbox-thumb{cursor:zoom-in}
+@media(max-width:760px){.page-lightbox{padding:12px}.page-lightbox img{max-width:94vw;max-height:82vh}.page-lightbox button{width:42px;height:42px}.page-lb-prev{left:8px}.page-lb-next{right:8px}.page-lb-close{right:8px;top:8px}}
+'''
+
+          markup = '''
+<div class="page-lightbox" id="page-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image gallery viewer"><button class="page-lb-close" type="button" aria-label="Close">×</button><button class="page-lb-prev" type="button" aria-label="Previous photo">‹</button><img id="page-lightbox-image" alt="LushnLight Decors gallery photo"><button class="page-lb-next" type="button" aria-label="Next photo">›</button></div>
+'''
+
+          script = '''
+<script id="secondary-lightbox-script">(function(){const box=document.getElementById("page-lightbox"),image=document.getElementById("page-lightbox-image");if(!box||!image)return;let thumbs=[...document.querySelectorAll("#gallery .gallery img")];if(!thumbs.length)thumbs=[...document.querySelectorAll(".evolve-photo")];if(!thumbs.length)return;let current=0,lastFocus=null;const closeBtn=box.querySelector(".page-lb-close");function show(i){current=(i+thumbs.length)%thumbs.length;const source=thumbs[current];image.src=source.currentSrc||source.src;image.alt=source.alt||"LushnLight Decors gallery photo";lastFocus=source;box.classList.add("open");box.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";closeBtn.focus()}function close(){box.classList.remove("open");box.setAttribute("aria-hidden","true");document.body.style.overflow="";if(lastFocus)lastFocus.focus({preventScroll:true})}thumbs.forEach((thumb,i)=>{thumb.classList.add("page-lightbox-thumb");thumb.setAttribute("role","button");thumb.setAttribute("tabindex","0");thumb.addEventListener("click",()=>show(i));thumb.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();show(i)}})});closeBtn.onclick=close;box.querySelector(".page-lb-prev").onclick=()=>show(current-1);box.querySelector(".page-lb-next").onclick=()=>show(current+1);box.addEventListener("click",e=>{if(e.target===box)close()});document.addEventListener("keydown",e=>{if(!box.classList.contains("open"))return;if(e.key==="Escape")close();else if(e.key==="ArrowLeft")show(current-1);else if(e.key==="ArrowRight")show(current+1)})})();</script>
+'''
+
+          for path in pages:
+              text = path.read_text(encoding='utf-8')
+              if 'secondary-lightbox-script' in text:
+                  continue
+              style_end = text.rfind('</style>')
+              if style_end == -1:
+                  raise RuntimeError(f'No </style> in {path}')
+              text = text[:style_end] + css + text[style_end:]
+              body_end = text.rfind('</body>')
+              if body_end == -1:
+                  raise RuntimeError(f'No </body> in {path}')
+              text = text[:body_end] + markup + script + text[body_end:]
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit secondary lightboxes
         shell: bash
         run: |
           git config user.name "lushnlightdecors"
           git config user.email "lushnlightdecors@gmail.com"
           git add about/index.html wedding-decor/index.html birthday-decor/index.html baby-shower-decor/index.html aqiqah-decor/index.html mehndi-traditional-decor/index.html
-          git commit -m "Add gallery lightbox to secondary pages" || exit 0
+          git commit -m "Add gallery lightbox navigation to secondary pages" || exit 0
           git push
