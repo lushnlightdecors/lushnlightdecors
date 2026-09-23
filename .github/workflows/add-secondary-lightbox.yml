@@ -1,0 +1,56 @@
+name: Add secondary page lightbox
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-secondary-lightbox.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  add-lightbox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add homepage-style lightbox to secondary pages
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          pages = [
+              Path('about/index.html'),
+              Path('wedding-decor/index.html'),
+              Path('birthday-decor/index.html'),
+              Path('baby-shower-decor/index.html'),
+              Path('aqiqah-decor/index.html'),
+              Path('mehndi-traditional-decor/index.html'),
+          ]
+
+          css = r'''
+.secondary-lightbox{position:fixed;inset:0;z-index:1000;background:rgba(12,24,18,.94);display:none;align-items:center;justify-content:center;padding:24px}.secondary-lightbox.open{display:flex}.secondary-lightbox img{max-width:min(1100px,90vw);max-height:86vh;object-fit:contain;border-radius:10px;box-shadow:0 16px 50px rgba(0,0,0,.35)}.secondary-lightbox button{position:absolute;border:0;background:rgba(255,255,255,.92);color:#123f2a;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;display:grid;place-items:center;line-height:1}.secondary-lightbox .slb-close{right:22px;top:22px}.secondary-lightbox .slb-prev{left:22px}.secondary-lightbox .slb-next{right:22px}.gallery img,.hero-img,.evolve-photo{cursor:zoom-in}@media(max-width:760px){.secondary-lightbox{padding:12px}.secondary-lightbox .slb-prev{left:8px}.secondary-lightbox .slb-next{right:8px}.secondary-lightbox .slb-close{right:8px;top:8px}}
+'''.strip()
+
+          js = r'''
+<script id="secondary-lightbox-script">(function(){if(document.getElementById('secondary-lightbox'))return;const candidates=[...document.querySelectorAll('#gallery .gallery img,.hero-img,.evolve-photo')];if(!candidates.length)return;const box=document.createElement('div');box.className='secondary-lightbox';box.id='secondary-lightbox';box.setAttribute('aria-hidden','true');box.innerHTML='<button class="slb-close" type="button" aria-label="Close">×</button><button class="slb-prev" type="button" aria-label="Previous photo">‹</button><img class="slb-image" alt="LushnLight Decors gallery photo"><button class="slb-next" type="button" aria-label="Next photo">›</button>';document.body.appendChild(box);const image=box.querySelector('.slb-image');let current=0;function show(i){current=(i+candidates.length)%candidates.length;image.src=candidates[current].currentSrc||candidates[current].src;image.alt=candidates[current].alt||'LushnLight Decors gallery photo';box.classList.add('open');box.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}function close(){box.classList.remove('open');box.setAttribute('aria-hidden','true');document.body.style.overflow=''}candidates.forEach((el,i)=>{el.setAttribute('tabindex','0');el.setAttribute('role','button');el.setAttribute('aria-label',(el.alt||'Decor photo')+' — open image viewer');el.addEventListener('click',()=>show(i));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(i)}})});box.querySelector('.slb-close').addEventListener('click',close);box.querySelector('.slb-prev').addEventListener('click',()=>show(current-1));box.querySelector('.slb-next').addEventListener('click',()=>show(current+1));box.addEventListener('click',e=>{if(e.target===box)close()});document.addEventListener('keydown',e=>{if(!box.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1)});})();</script>
+'''.strip()
+
+          for path in pages:
+              text = path.read_text(encoding='utf-8')
+              if 'secondary-lightbox{' not in text:
+                  text = text.replace('</style>', css + '</style>', 1)
+              if 'id="secondary-lightbox-script"' not in text:
+                  text = text.replace('</body>', js + '</body>', 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit lightbox functionality
+        shell: bash
+        run: |
+          git config user.name "lushnlightdecors"
+          git config user.email "lushnlightdecors@gmail.com"
+          git add about/index.html wedding-decor/index.html birthday-decor/index.html baby-shower-decor/index.html aqiqah-decor/index.html mehndi-traditional-decor/index.html
+          git commit -m "Add gallery lightbox to secondary pages" || exit 0
+          git push
