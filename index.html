@@ -164,9 +164,10 @@ footer a:hover,.footer a:hover,.footer-links a:hover{color:#C2A56D!important}
 
 /* Floating close button for decor element modals */
 .decor-element-modal.open .decor-element-close{
-  position:fixed!important;
-  top:max(16px, env(safe-area-inset-top))!important;
-  right:max(16px, env(safe-area-inset-right))!important;
+  position:sticky!important;
+  top:14px!important;
+  right:auto!important;
+  margin:-58px 0 10px auto!important;
   z-index:140!important;
   width:48px!important;
   height:48px!important;
@@ -183,8 +184,9 @@ footer a:hover,.footer a:hover,.footer-links a:hover{color:#C2A56D!important}
 }
 @media(max-width:760px){
   .decor-element-modal.open .decor-element-close{
-    top:max(10px, env(safe-area-inset-top))!important;
-    right:max(10px, env(safe-area-inset-right))!important;
+    top:12px!important;
+    right:auto!important;
+    margin:-54px 0 8px auto!important;
     width:46px!important;
     height:46px!important;
   }
