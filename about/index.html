@@ -42,6 +42,16 @@ footer,.footer{background:#163D32!important;color:#FFFDF8!important}
 footer a,.footer a,footer p,footer .family,.footer p{color:#FFFDF8!important}
 footer a:hover,.footer a:hover,.footer-links a:hover{color:#C2A56D!important}
 
+
+
+/* Homepage-style navigation hover for secondary pages */
+.links a{position:relative;transition:color .22s ease,transform .22s ease,letter-spacing .22s ease}
+@media(hover:hover) and (pointer:fine){
+  .links a:after{content:"";position:absolute;left:50%;right:50%;bottom:2px;height:1.5px;background:#C2A56D;transition:left .22s ease,right .22s ease}
+  .links a:hover{color:#C2A56D!important;transform:translateY(-2px);letter-spacing:.055em}
+  .links a:hover:after{left:0;right:0}
+}
+
 </style></head><body>
 <nav><div class="wrap nav"><a class="brand" href="../"><img class="logo" src="../IMG_9756.PNG" alt="LushnLight Decors logo"></a><div class="header-socials"><div class="secondary-socials header-social-icons" aria-label="Social media">
 <a href="https://share.google/sTeZWsy7HxX6QPseY" target="_blank" rel="noopener" aria-label="Google"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.35 11.1H12v3.8h5.38c-.73 2.45-2.78 3.8-5.38 3.8a6.7 6.7 0 1 1 0-13.4c1.56 0 2.96.54 4.06 1.59l2.84-2.84A10.56 10.56 0 0 0 12 1.3a10.7 10.7 0 1 0 0 21.4c6.18 0 10.27-4.34 10.27-10.45 0-.4-.05-.78-.12-1.15h-.8z"/></svg></a>
